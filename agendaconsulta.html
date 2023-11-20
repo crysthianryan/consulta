@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Consulta Médica</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #952f57;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            margin-bottom: 8px;
+            color: #5d4037;
+        }
+
+        input,
+        select {
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #a1887f;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #952f57;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #d7ccc8;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .consulta-button {
+            background-color: #5d4037;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Sistema de Consulta Médica</h1>
+    </header>
+
+    <section id="medicosSection">
+        <h2>Consulta de Médicos Disponíveis</h2>
+        <table id="medicosDisponiveis">
+            <tr>
+                <th>Nome</th>
+                <th>Especialização</th>
+                <th>Horários Disponíveis</th>
+                <th>Agendar Consulta</th>
+            </tr>
+            <!-- Lista de médicos fictícios -->
+            <tr>
+                <td>Dr. João Silva</td>
+                <td>Cardiologista</td>
+                <td>Segunda e Quarta - 9h às 12h</td>
+                <td><button onclick="agendarConsulta('Dr. João Silva', 'Cardiologista')">Agendar</button></td>
+            </tr>
+            <tr>
+                <td>Dra. Maria Oliveira</td>
+                <td>Dermatologista</td>
+                <td>Terça e Quinta - 14h às 18h</td>
+                <td><button onclick="agendarConsulta('Dra. Maria Oliveira', 'Dermatologista')">Agendar</button></td>
+            </tr>
+            <!-- Adicione mais médicos conforme necessário -->
+        </table>
+    </section>
+
+    <section id="consultasSection" style="display:none;">
+        <h2>Consultas Agendadas</h2>
+        <table id="consultasAgendadas">
+            <tr>
+                <th>Paciente</th>
+                <th>Médico</th>
+                <th>Especialização</th>
+                <th>Data</th>
+                <th>Horário</th>
+                <th>Detalhes</th>
+            </tr>
+            <!-- Adicione consultas agendadas aqui usando JavaScript -->
+        </table>
+    </section>
+
+    <section id="registroConsultaSection" style="display:none;">
+        <h2>Registro de Consultas</h2>
+        <form id="registroConsultaForm">
+            <label for="pacienteNome">Nome do Paciente:</label>
+            <input type="text" id="pacienteNome" name="pacienteNome">
+
+            <label for="medico">Médico:</label>
+            <input type="text" id="medico" name="medico" readonly>
+
+            <label for="dataConsulta">Data da Consulta:</label>
+            <input type="date" id="dataConsulta" name="dataConsulta">
+
+            <label for="horarioConsulta">Horário da Consulta:</label>
+            <input type="time" id="horarioConsulta" name="horarioConsulta">
+
+            <label for="detalhesConsulta">Detalhes da Consulta:</label>
+            <textarea id="detalhesConsulta" name="detalhesConsulta" rows="4"></textarea>
+
+            <!-- Adicione este campo oculto para armazenar a especialização do médico -->
+            <input type="hidden" id="medicoEspecializacao" name="medicoEspecializacao">
+
+            <button type="button" onclick="registrarConsulta()">Registrar Consulta</button>
+        </form>
+    </section>
+
+    <script>
+        let consultas = []; // Lista de consultas agendadas
+
+        function agendarConsulta(nomeMedico, especializacao) {
+            // Exemplo: redirecionar para a página de registro de consulta com o médico preselecionado
+            document.getElementById('pacienteNome').value = ''; // Limpa o campo do paciente
+            document.getElementById('medico').value = `${nomeMedico} - ${especializacao}`;
+            document.getElementById('medicoEspecializacao').value = especializacao; // Adiciona a especialização
+            document.getElementById('dataConsulta').value = '';
+            document.getElementById('horarioConsulta').value = '';
+            document.getElementById('detalhesConsulta').value = '';
+
+            // Exibe a seção de registro de consulta
+            document.getElementById('medicosSection').style.display = 'none';
+            document.getElementById('consultasSection').style.display = 'none';
+            document.getElementById('registroConsultaSection').style.display = 'block';
+        }
+
+        function registrarConsulta() {
+            const pacienteNome = document.getElementById('pacienteNome').value;
+            const medicoSelecionado = document.getElementById('medico').value;
+            const medicoEspecializacao = document.getElementById('medicoEspecializacao').value; // Captura a especialização
+            const dataConsulta = document.getElementById('dataConsulta').value;
+            const horarioConsulta = document.getElementById('horarioConsulta').value;
+            const detalhesConsulta = document.getElementById('detalhesConsulta').value;
+
+            // Validação dos campos
+            if (!pacienteNome || !medicoSelecionado || !dataConsulta || !horarioConsulta || !detalhesConsulta) {
+                alert('Preencha todos os campos para registrar a consulta.');
+                return;
+            }
+
+            // Construir um objeto com os dados da consulta
+            const consultaData = {
+                pacienteNome,
+                medicoEspecializacao,
+                dataConsulta,
+                horarioConsulta,
+                detalhesConsulta
+            };
+
+            // Enviar os dados para o servidor usando fetch
+            fetch('registrar_consulta.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(consultaData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message); // Exibe a mensagem de sucesso ou erro
+                if (data.success) {
+                    exibirConsultasAgendadas(); // Atualiza a tabela se a consulta foi registrada com sucesso
+                }
+            })
+            .catch(error => console.error('Erro:', error));
+        }
+
+        function exibirConsultasAgendadas() {
+            const tabela = document.getElementById('consultasAgendadas');
+
+            // Limpa a tabela
+            tabela.innerHTML = '';
+
+            // Exemplo de consultas agendadas (simulação)
+            consultas.push({
+                paciente: 'Maria',
+                medico: 'Dr. João Silva',
+                especializacao: 'Cardiologista',
+                data: '2023-11-20',
+                horario: '14:30',
+                detalhes: 'Consulta de rotina'
+            });
+
+            // Cria uma nova linha para cada consulta agendada
+            consultas.forEach(consulta => {
+                const newRow = tabela.insertRow();
+                newRow.innerHTML = `<td>${consulta.paciente}</td><td>${consulta.medico} - ${consulta.especializacao}</td><td>${consulta.data}</td><td>${consulta.horario}</td><td>${consulta.detalhes}</td>`;
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Consulta Médica - Hospital Antonio Miguel</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e1d6cb; /* Bege claro */
+            color: #952f57; /* Marrom escuro */
+        }
+
+        header {
+            background-color: #952f57; /* Marrom */
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #952f57; /* Marrom escuro */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button.consulta-button {
+            background-color: #8d6e63; /* Marrom médio */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Hospital Antonio Miguel - Consulta Médica</h1>
+    </header>
+
+    <section>
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha">
+
+            <button type="button" onclick="realizarLogin()">Login</button>
+        </form>
+
+        <p>Não tem uma conta? <a href="file:///C:/Users/cryst/Desktop/Consulta/Cadastrologin.html">Cadastre-se</a></p>
+    </section>
+
+    <script>
+        function realizarLogin() {
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            // Adicione a lógica de login aqui, por exemplo, verificar se o email e a senha correspondem a um usuário cadastrado.
+
+            // Simulação de login bem-sucedido (substitua com sua lógica real de login)
+            const loginBemSucedido = validarLogin(email, senha);
+
+            if (loginBemSucedido) {
+                // Limpa os campos do formulário
+                document.getElementById('email').value = '';
+                document.getElementById('senha').value = '';
+
+                // Redireciona para a página de agendamento de consulta
+                window.location.href = 'file:///C:/Users/cryst/Desktop/Consulta/agendaconsulta.html';
+            } else {
+                // Se o login não for bem-sucedido, você pode exibir uma mensagem de erro, por exemplo:
+                alert('Login falhou. Verifique seu email e senha.');
+            }
+        }
+
+        function validarLogin(email, senha) {
+            // Adicione a lógica de validação do login aqui
+            // Por exemplo, você pode verificar se o email e a senha estão em uma lista de usuários cadastrados.
+            // Retorne true se o login for válido, false caso contrário.
+
+            // Lógica de exemplo:
+            const usuariosCadastrados = [
+                { email: 'usuario1@email.com', senha: 'senha123' },
+                { email: 'usuario2@email.com', senha: 'senha456' },
+                // Adicione mais usuários conforme necessário
+            ];
+
+            return usuariosCadastrados.some(usuario => usuario.email === email && usuario.senha === senha);
+        }
+    </script>
+</body>
+
+</html>

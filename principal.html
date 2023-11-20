@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Antonio Miguel</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color:#e1d6cb;
+            text-align: center;
+        }
+
+        header {
+            background-color:#952f57;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #952f57;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .button-container {
+            position: absolute;
+            top: 10px; /* Ajuste a posição superior conforme necessário */
+            right: 10px; /* Ajuste a posição direita conforme necessário */
+        }
+
+        .specialities-list {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 200px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .specialities-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .specialities-list li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Hospital Antonio Miguel</h1>
+    </header>
+
+    <section>
+        <h2>Bem-vindo ao Hospital Antonio Miguel</h2>
+        <p>Agende sua consulta agora mesmo!</p>
+        <p><strong>Comprometimento com a Saúde e Inovação Médica</strong></p>
+        <p>Integrante da Rede de Saúde desde [ano de integração], o Hospital Antonio Miguel é uma referência no cenário médico, oferecendo serviços de excelência e atendimento abrangente no âmbito da saúde. Localizado em [sua localização], destacamo-nos por proporcionar cuidados de média e alta complexidades, reunindo diversas especialidades e serviços para atender às necessidades variadas de nossos pacientes.</p>
+
+        <div class="button-container">
+            <button onmouseover="showSpecialities()" onmouseout="hideSpecialities()">Principais Serviços e Especialidades</button>
+            <div class="specialities-list" id="specialitiesList">
+                <ul>
+                    <li>Cardiologia</li>
+                    <li>Dermatologia</li>
+                    <!-- Adicione mais especialidades conforme necessário -->
+                </ul>
+            </div>
+        </div>
+
+        <button onclick="irParaLogin()">Marcar Consulta</button>
+    </section>
+
+    <script>
+        function irParaLogin() {
+            // Redireciona para a página de login
+            window.location.href = 'file:///C:/xampp/htdocs/Consulta/login.html';
+        }
+
+        function showSpecialities() {
+            document.getElementById('specialitiesList').style.display = 'block';
+        }
+
+        function hideSpecialities() {
+            document.getElementById('specialitiesList').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
